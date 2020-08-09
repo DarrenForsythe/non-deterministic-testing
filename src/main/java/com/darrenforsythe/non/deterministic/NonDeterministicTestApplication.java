@@ -14,30 +14,30 @@ import org.springframework.util.JdkIdGenerator;
 @SpringBootApplication
 public class NonDeterministicTestApplication implements ApplicationRunner {
 
-	private static final Logger log = LoggerFactory.getLogger(NonDeterministicTestApplication.class);
+    private static final Logger log =
+            LoggerFactory.getLogger(NonDeterministicTestApplication.class);
 
-	@Autowired
-	private HardToTestService hardToTestService;
+    @Autowired private HardToTestService hardToTestService;
 
-	public static void main(String[] args) {
-		SpringApplication.run(NonDeterministicTestApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(NonDeterministicTestApplication.class, args);
+    }
 
-	@Override
-	public void run(ApplicationArguments arg0) throws Exception {
-		log.info("UUID 1 - {}", hardToTestService.getUUID());
-		log.info("UUID 2 - {}", hardToTestService.getUUID());
-		log.info("Current Instant 1 - {}", hardToTestService.getInstant());
-		log.info("Current Instant 2 - {}", hardToTestService.getInstant());
-	}
+    @Override
+    public void run(ApplicationArguments arg0) throws Exception {
+        log.info("UUID 1 - {}", hardToTestService.getUUID());
+        log.info("UUID 2 - {}", hardToTestService.getUUID());
+        log.info("Current Instant 1 - {}", hardToTestService.getInstant());
+        log.info("Current Instant 2 - {}", hardToTestService.getInstant());
+    }
 
-	@Bean
-	public IdGenerator idGenerator() {
-		return new JdkIdGenerator();
-	}
+    @Bean
+    public IdGenerator idGenerator() {
+        return new JdkIdGenerator();
+    }
 
-	@Bean
-	public CurrentTimeGenerator currentTimeGenerator() {
-		return () -> System.currentTimeMillis();
-	}
+    @Bean
+    public CurrentTimeGenerator currentTimeGenerator() {
+        return () -> System.currentTimeMillis();
+    }
 }
